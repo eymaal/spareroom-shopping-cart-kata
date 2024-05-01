@@ -4,7 +4,9 @@ package com.spareroom.shoppingcartkata.util;
 import com.spareroom.shoppingcartkata.model.Product;
 import com.spareroom.shoppingcartkata.model.SpecialPrice;
 
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 /**
  * This class is a container which effectively acts as the Product Dataset.
@@ -14,7 +16,7 @@ import java.util.Set;
  * For a full-fledged application/API, this could be shifted to a JSON/ database instead.
  */
 public final class ProductDataset {
-    private static Set<Product> INSTANCE = new HashSet<>();
+    private static Map<String, Product> INSTANCE = new HashMap<>();
 
     private ProductDataset(){}
 
@@ -53,16 +55,20 @@ public final class ProductDataset {
         ProductDataset.addProduct(product);
     }
 
-    public static Set<Product> getInstance() {
+    public static Map<String, Product> getInstance() {
         return INSTANCE;
     }
 
+    public static Product getProduct(String itemCode) {
+        return INSTANCE.getOrDefault(itemCode, null);
+    }
+
     public static void addProduct(Product product) {
-        INSTANCE.add(product);
+        INSTANCE.put(product.getItemCode(),product);
     }
 
     public static void removeProduct(Product product) {
-        INSTANCE.remove(product);
+        INSTANCE.remove(product.getItemCode());
     }
 
 }
