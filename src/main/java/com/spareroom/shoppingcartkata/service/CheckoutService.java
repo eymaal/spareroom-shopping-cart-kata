@@ -5,7 +5,6 @@ import com.spareroom.shoppingcartkata.model.ProductResponse;
 import com.spareroom.shoppingcartkata.model.SubTotalResponse;
 import com.spareroom.shoppingcartkata.util.ProductDataset;
 import lombok.Data;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
@@ -13,6 +12,7 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 @Component
 @Service
@@ -44,10 +44,13 @@ public class CheckoutService {
         return itemTotal;
     }
 
-    public List<ProductResponse> consumeDataSource() {
+    public List<ProductResponse> consumeDataSource() throws Exception {
         RestTemplate template = new RestTemplate();
-        List<ProductResponse> productResponseList = Arrays.asList(template.getForObject(url, ProductResponse[].class));
-        return productResponseList;
+        try {
+            return Arrays.asList(Objects.requireNonNull(template.getForObject(url, ProductResponse[].class)));
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
     }
 
 }
