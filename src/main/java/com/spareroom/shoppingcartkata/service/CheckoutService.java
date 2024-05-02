@@ -4,19 +4,26 @@ import com.spareroom.shoppingcartkata.model.Product;
 import com.spareroom.shoppingcartkata.model.ProductResponse;
 import com.spareroom.shoppingcartkata.model.SubTotalResponse;
 import com.spareroom.shoppingcartkata.util.ProductDataset;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
+
 @Component
-@Service
 @Data
+@Service
+@AllArgsConstructor
+@NoArgsConstructor
 public class CheckoutService {
     //TODO move url to application.properties.
     String url = "https://spareroom.github.io/recruitment/docs/cart-kata/data-set-1.json";
@@ -38,7 +45,7 @@ public class CheckoutService {
         if(product.getSpecialPrice()!=null) {
             qty = item.getQuantity() / product.getSpecialPrice().getQuantity();
             itemTotal+= qty * product.getSpecialPrice().getPrice();
-            qty = item.getQuantity() % product.getSpecialPrice().getQuantity();
+            qty = item.getQuantity() % product. getSpecialPrice().getQuantity();
         }
         itemTotal+= qty * product.getUnitPrice();
         return itemTotal;

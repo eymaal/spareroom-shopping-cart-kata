@@ -3,6 +3,7 @@ package com.spareroom.shoppingcartkata.util;
 
 import com.spareroom.shoppingcartkata.model.Product;
 import com.spareroom.shoppingcartkata.model.SpecialPrice;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -15,6 +16,7 @@ import java.util.Set;
  * This static block creates the initial products necessary for our Shopping Cart kata and adds it to the hashset.
  * For a full-fledged application/API, this could be shifted to a JSON/ database instead.
  */
+@Slf4j
 public final class ProductDataset {
     private static Map<String, Product> INSTANCE = new HashMap<>();
 
@@ -25,6 +27,7 @@ public final class ProductDataset {
      * For a full-fledged application/API, this could be shifted to a JSON/ database instead.
      */
     static {
+        log.info("Initiating pricing dataset creation");
         Product product = Product
                 .builder()
                 .itemCode("A")
@@ -53,6 +56,7 @@ public final class ProductDataset {
                 .unitPrice(12.00)
                 .build();
         ProductDataset.addProduct(product);
+        log.info("Pricing dataset created and loaded");
     }
 
     public static Map<String, Product> getInstance() {
