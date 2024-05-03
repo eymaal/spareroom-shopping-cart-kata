@@ -10,7 +10,7 @@ The checkout system consumes a data source like [this](https://spareroom.github.
 The Shopping Cart system was implemented as a REST API using [Java](https://www.oracle.com/java/technologies/downloads/#java21) and Spring Boot. 
 Additionally, [Maven](https://maven.apache.org/) is required to run this API. 
 Unit Test cases were written using JUnit, and the endpoints were documented using Swagger following the OpenAPI spec.
-Coverage report for the tests can be found in a separate repo [here](https://github.com/eymaal/spareroom-shopping-cart-kata-test-report).
+These tests cover 80% lines of code. Coverage report for the tests can be found in a separate repo [here](https://github.com/eymaal/spareroom-shopping-cart-kata-test-report).
 
 ## ⚡ Running this API
 Navigate to the directory and the run the following commands:
