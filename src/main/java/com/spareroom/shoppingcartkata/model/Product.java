@@ -18,10 +18,6 @@ public class Product {
 
     @Override
     public String toString() {
-        return "Product{" +
-                "itemCode='" + itemCode + '\'' +
-                ", unitPrice=" + unitPrice +
-                (specialPrice==null? "": ", specialPrice=" + specialPrice) +
-                '}';
+        return "Product{" + "itemCode='" + itemCode + '\'' + ", unitPrice=" + unitPrice + (specialPrice==null? "": ", specialPrice=" + specialPrice) + '}';
     }
 }

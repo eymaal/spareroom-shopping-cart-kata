@@ -8,6 +8,7 @@ import com.spareroom.shoppingcartkata.util.ProductDataset;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
@@ -21,8 +22,13 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CheckoutService {
-    //TODO move url to application.properties.
-    String url = "https://spareroom.github.io/recruitment/docs/cart-kata/data-set-1.json";
+
+    private String url;
+
+    @Value("${url}")
+    public void setUrl(String url) {
+        this.url = url;
+    }
 
     public ResponseEntity<SubTotalResponse> checkout() throws Exception{
         List<ProductResponse> quantityList = DatasourceConsumerUtil.consumeDatasource(url);

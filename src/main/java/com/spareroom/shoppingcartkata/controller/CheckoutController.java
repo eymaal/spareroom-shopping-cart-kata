@@ -55,9 +55,7 @@ public class CheckoutController {
             return checkoutService.checkout();
         } catch(Exception e) {
             log.error(e.getMessage());
-            return ResponseEntity
-                    .badRequest()
-                    .body(ShoppingCartException.builder().message(e.getMessage()).build());
+            return ResponseEntity.badRequest().body(ShoppingCartException.builder().message(e.getMessage()).build());
         }
     }
 }
