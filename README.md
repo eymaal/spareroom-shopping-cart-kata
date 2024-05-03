@@ -6,8 +6,6 @@ To implement a simple checkout system where there are four products available, e
 Some products have a special price when bought in certain quantities (e.g. 3 of product A costs 140, not 150). 
 The checkout system consumes a data source like [this](https://spareroom.github.io/recruitment/docs/cart-kata/data-set-1.json), and returns the sub total when queried.
 
-Make sure your solution includes everything that it would in a production environment, i.e. verifying results / testing, documentation.
-
 ## Implementation
 The Shopping Cart system was implemented as a REST API using Java and Spring Boot. 
 Additionally, Maven is required to run this API. 
@@ -20,3 +18,5 @@ Navigate to the directory and the run the following commands:
 ```mvn clean```
 
 ```mvn spring-boot:run```
+
+The server is configured to run on port 8080. Once the server has started, details about the endpoints can be found [here](http://localhost:8080/swagger-ui/index.html)
