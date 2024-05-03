@@ -20,7 +20,7 @@ public class DatasourceConsumerUtil {
         RestTemplate template = new RestTemplate();
         try {
             List<ProductResponse> productResponseList = Arrays.asList(Objects.requireNonNull(template.getForObject(url, ProductResponse[].class)));
-            productResponseList.forEach(p -> validateItem(p));
+            productResponseList.forEach(DatasourceConsumerUtil::validateItem);
             return productResponseList;
         } catch (ShoppingCartException e) {
             throw e;
