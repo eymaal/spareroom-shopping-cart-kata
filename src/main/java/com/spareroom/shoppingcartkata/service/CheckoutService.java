@@ -25,31 +25,38 @@ public class CheckoutService {
 
     private String url;
 
-    @Value("${url}")
+    @Value("${spareroom.datasource.url}")
     public void setUrl(String url) {
         this.url = url;
     }
 
     public ResponseEntity<SubTotalResponse> checkout() throws Exception{
         List<ProductResponse> quantityList = DatasourceConsumerUtil.consumeDatasource(url);
-        double subTotal=0.0;
+        double subTotal = getSubtotal(quantityList);
+        return ResponseEntity.ok().body(SubTotalResponse.builder().subTotal(subTotal).build());
+    }
+
+    public double getSubtotal(List<ProductResponse> quantityList) throws Exception {
+        double subTotal = 0.0;
         for(ProductResponse item : quantityList) {
             Product product = ProductDataset.getProduct(item.getCode());
             if(product == null) throw new Exception(String.format("Item %s does not exist", item.getCode()));
             subTotal+= getItemPrice(item, product);
         }
-        return ResponseEntity.ok().body(SubTotalResponse.builder().subTotal(subTotal).build());
+        return subTotal;
     }
 
     private double getItemPrice(ProductResponse item, Product product) {
         double itemTotal = 0.0;
-        int qty = item.getQuantity();
+        int qty = Math.max(0, item.getQuantity());
+        double unitPrice = Math.max(0, product.getUnitPrice());
         if(product.getSpecialPrice()!=null) {
-            qty = item.getQuantity() / product.getSpecialPrice().getQuantity();
-            itemTotal+= qty * product.getSpecialPrice().getPrice();
-            qty = item.getQuantity() % product. getSpecialPrice().getQuantity();
+            double specialPrice = Math.max(0, product.getSpecialPrice().getPrice());
+            int specialQty = Math.max(0, product.getSpecialPrice().getQuantity());
+            itemTotal = itemTotal + specialPrice * (qty / specialQty);
+            qty = qty % specialQty;
         }
-        itemTotal+= qty * product.getUnitPrice();
+        itemTotal+= qty * unitPrice;
         return itemTotal;
     }
 

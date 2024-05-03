@@ -6,9 +6,7 @@ import com.spareroom.shoppingcartkata.model.SpecialPrice;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 /**
  * This class is a container which effectively acts as the Product Dataset.
  * The ProductDataset is implemented using the Singleton Design pattern and is a HashSet of Products.
