@@ -16,7 +16,7 @@ import java.util.Map;
  */
 @Slf4j
 public final class ProductDataset {
-    private static Map<String, Product> INSTANCE = new HashMap<>();
+    private static final Map<String, Product> INSTANCE = new HashMap<>();
 
     private ProductDataset(){}
 
