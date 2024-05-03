@@ -16,5 +16,7 @@ Coverage report for the tests can be found in a separate repo [here](https://git
 
 ## To run this API,
 Navigate to the directory and the run the following commands:
+
 ```mvn clean```
+
 ```mvn spring-boot:run```
