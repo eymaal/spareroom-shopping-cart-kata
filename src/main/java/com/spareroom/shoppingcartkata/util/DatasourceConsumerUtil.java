@@ -1,6 +1,5 @@
 package com.spareroom.shoppingcartkata.util;
 
-import com.spareroom.shoppingcartkata.ShoppingCartKataApplication;
 import com.spareroom.shoppingcartkata.model.ProductResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.validator.routines.UrlValidator;
@@ -20,9 +19,24 @@ public class DatasourceConsumerUtil {
         }
         RestTemplate template = new RestTemplate();
         try {
-            return Arrays.asList(Objects.requireNonNull(template.getForObject(url, ProductResponse[].class)));
+            List<ProductResponse> productResponseList = Arrays.asList(Objects.requireNonNull(template.getForObject(url, ProductResponse[].class)));
+            productResponseList.forEach(p -> validateItem(p));
+            return productResponseList;
+        } catch (ShoppingCartException e) {
+            throw e;
         } catch (Exception e) {
             throw ShoppingCartException.builder().message(e.getMessage()).build();
+        }
+    }
+
+    public static void validateItem(ProductResponse response) throws ShoppingCartException {
+        if (response.getQuantity() < 0) {
+            throw new ShoppingCartException("Invalid details", "Datasource contains negative quantity");
+        } else if (response.getCode().isBlank()) {
+            throw new ShoppingCartException("Invalid details", "Datasource contains invalid product code");
+        } else if (!ProductDataset.contains(response.getCode())) {
+            throw new ShoppingCartException("Invalid details",
+                    String.format("Product %s does not exist in dataset", response.getCode()));
         }
     }
 

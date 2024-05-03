@@ -68,11 +68,22 @@ public final class ProductDataset {
     }
 
     public static void addProduct(Product product) {
+        validateProduct(product);
         INSTANCE.put(product.getItemCode(),product);
     }
 
-    public static void removeProduct(Product product) {
-        INSTANCE.remove(product.getItemCode());
+    public static void removeProduct(String code) {
+        INSTANCE.remove(code);
     }
 
+    private static void validateProduct(Product product) {
+        if(product.getItemCode()==null || product.getItemCode().isEmpty()
+                || product.getUnitPrice() < 0) {
+            throw new ShoppingCartException("Invalid product", "product contains empty or negative values");
+        }
+    }
+
+    public static boolean contains(String code) {
+        return INSTANCE.containsKey(code);
+    }
 }

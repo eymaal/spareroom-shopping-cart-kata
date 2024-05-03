@@ -47,13 +47,4 @@ public class CheckoutService {
         return itemTotal;
     }
 
-//    public List<ProductResponse> consumeDataSource() throws Exception {
-//        RestTemplate template = new RestTemplate();
-//        try {
-//            return Arrays.asList(Objects.requireNonNull(template.getForObject(url, ProductResponse[].class)));
-//        } catch (Exception e) {
-//            throw new Exception(e.getMessage());
-//        }
-//    }
-
 }
