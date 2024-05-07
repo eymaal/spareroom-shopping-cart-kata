@@ -15,7 +15,7 @@ These tests cover 80% lines of code. Coverage report for the tests can be found 
 ## ⚡ Running this API
 Navigate to the directory and the run the following commands:
 
-```mvn clean```
+```mvn clean install```
 
 ```mvn spring-boot:run```
 
@@ -23,3 +23,5 @@ The server is configured to run on port 8080.
 Once the server has started, details about the endpoints can be found [here](http://localhost:8080/swagger-ui/index.html).
 Alternatively, the checkout endpoint can be reached [here](localhost:8080/api/v1/checkout).
 The URL to the datasource is configured in `\src\main\resources\application.properties`.
+
+_Edit:_ command ```mvn clean``` was updated to ```mvn clean install``` on 07/04. ```mvn clean install``` will run the added unit test cases too. 
